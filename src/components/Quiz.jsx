@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import data from "./data.json";
+import {data} from "../data";
+import QuizCard from "./QuizCard";
 
 const Quiz = () => {
   const [count, setCount] = useState(10);
@@ -13,7 +14,7 @@ const Quiz = () => {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [count, questionNo]);
     
   return (
     <div style={{ width: "60%", margin: "auto" }}>
@@ -29,16 +30,7 @@ const Quiz = () => {
         <div>Time Left 0:{count}</div>
       </div>
       <div style={{ width: "80%", margin: "auto", border: "1px solid black" }}>
-        {data?.map((item) => (
-          <div>
-            <div>{item.question}</div>
-            <div>
-              {item.answer?.map((item) => (
-                <div>{item}</div>
-              ))}
-            </div>
-          </div>
-        ))}
+        <QuizCard data={data} questionNo={questionNo} />
       </div>
     </div>
   );
